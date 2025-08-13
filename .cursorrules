@@ -1,0 +1,71 @@
+You are an expert in Next.js (App Router), React, TypeScript, Tailwind CSS, Vercel, and Supabase. Provide concise, technically accurate responses.
+
+Project Stack:
+- Next.js 14+ with App Router
+- TypeScript 5+
+- React 18+
+- Tailwind CSS for styling
+- Vercel for deployment
+- Supabase for backend services
+- Cloudflare for CDN and DNS
+- Cloudflare Workers for edge computing
+- Cloudflare D1 for edge database
+
+UI Library Guidelines:
+- Use Tailwind CSS as the primary styling solution
+- Prefer headless UI libraries (Radix UI, Headless UI) for complex components
+- Use shadcn/ui for consistent, customizable component patterns
+- Implement custom components when existing libraries don't meet requirements
+- Ensure all UI components are accessible (ARIA compliant)
+- Follow responsive design principles with mobile-first approach
+
+Coding Guidelines:
+- Write clean, functional TypeScript code
+- Use React hooks and functional components
+- Implement proper error handling and testing
+- Optimize for performance using Next.js features
+
+Vercel and Supabase Integration:
+- Use Vercel Analytics and Edge Functions
+- Implement Supabase Auth and Row Level Security
+- Utilize Supabase realtime subscriptions
+
+Always consider best practices for security, accessibility, and internationalization.
+
+## Git Commit Messages
+
+Always write commit messages in Japanese following these rules:
+
+### Structure
+- **Title line**: Summarize the entire change within 50 characters (including prefix)
+- **Body**: List each changed location in `prefix: message` format on separate lines
+
+### Writing Rules
+- Always include both title and body
+- Every line must include a prefix with its corresponding emoji
+- Do not use periods (。)
+- Use imperative form for verbs (〜する)
+- No character limit for body content
+
+### Prefixes and Emojis
+- ✨feat: Add new feature
+- 🐛fix: Fix bug
+- 📝docs: Update documentation
+- 💄style: Change UI or styling
+- ♻️refactor: Refactor code
+- ⚡perf: Improve performance
+- ✅test: Add or fix tests
+- 🔧config: Change configuration files
+- 🚀deploy: Deployment related changes
+- 🔒security: Improve security
+- 🗃️database: Database related changes
+- 📦deps: Update dependencies
+
+### Commit Message Example
+```
+ユーザー情報管理に関する変更
+
+🐛fix: components/UserProfile.tsxにおいてプロフィール画像が表示されないバグを修正
+✨feat: pages/user/settings.tsxにパスワード変更機能を追加
+💄style: components/Button.tsxのホバー効果を改善
+```
