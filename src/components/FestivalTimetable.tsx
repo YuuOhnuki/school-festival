@@ -109,7 +109,7 @@ const EventCard = ({
 
     return (
         <CometCard>
-            <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-all duration-300 hover:scale-101">
+            <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 hover:scale-101">
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-2xl">{typeIcons[type]}</span>
                     <div className="flex-1">
