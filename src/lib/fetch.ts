@@ -1,4 +1,4 @@
-let BASE_URL = process.env.VERCEL_URL;
+let BASE_URL = process.env.NEXT_API_URL;
 if (process.env.NODE_ENV == 'development') BASE_URL = 'http://localhost:3000';
 
 export async function getData(url: string, headers = {}) {
