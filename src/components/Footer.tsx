@@ -10,10 +10,8 @@ const Footer = ({ setCurrentPage }: FooterProps) => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>
-                        <h3 className="text-xl font-bold mb-4">厚木高校文化祭2024</h3>
-                        <p className="text-neutral-400">
-                            学生たちの創造力と情熱が詰まった素晴らしい文化祭をお楽しみください。
-                        </p>
+                        <h3 className="text-xl font-bold mb-4">厚木高校戸陵祭2025</h3>
+                        <p className="text-neutral-400">文化祭の説明</p>
                     </div>
 
                     <div>
@@ -61,20 +59,10 @@ const Footer = ({ setCurrentPage }: FooterProps) => {
                             </li>
                         </ul>
                     </div>
-
-                    <div>
-                        <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
-                        <div className="text-neutral-400 space-y-1">
-                            <p>神奈川県立厚木高等学校</p>
-                            <p>〒243-0004</p>
-                            <p>神奈川県厚木市水引2-7-1</p>
-                            <p>TEL: 046-221-4146</p>
-                        </div>
-                    </div>
                 </div>
 
                 <div className="border-t border-neutral-700 mt-8 pt-8 text-center text-neutral-400">
-                    <p>&copy; 2024 神奈川県立厚木高等学校. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Ohnuki Yuu. All rights reserved.</p>
                 </div>
             </div>
         </footer>

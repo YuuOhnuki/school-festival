@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/types/types';
+import Image from 'next/image';
 
 interface ProjectTabsProps {
     projects: Project[];
@@ -30,7 +31,7 @@ const ProjectTabs = ({ projects, onProjectSelect }: ProjectTabsProps) => {
                                 : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600'
                         }`}
                     >
-                        {project.className}
+                        3{project.className}
                     </button>
                 ))}
             </div>
@@ -47,7 +48,9 @@ const ProjectTabs = ({ projects, onProjectSelect }: ProjectTabsProps) => {
                 >
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <img
+                            <Image
+                                width="600"
+                                height="600"
                                 src={projects[activeTab].thumbnail || ''}
                                 alt={projects[activeTab].name}
                                 className="w-full h-64 object-cover rounded-xl"

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
+import Image from 'next/image';
 
 interface ProductDetailProps {
     product: Product;
@@ -52,7 +53,13 @@ const RelatedProducts = ({
                     onClick={() => handleProductClick(product)}
                 >
                     <div className="relative">
-                        <img src={product.thumbnail || ''} alt={product.name} className="w-full h-48 object-cover" />
+                        <Image
+                            width="600"
+                            height="600"
+                            src={product.thumbnail || ''}
+                            alt={product.name}
+                            className="w-full h-48 object-cover"
+                        />
                         {product.isSoldOut && (
                             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                                 <span className="text-white font-bold">売り切れ</span>
@@ -111,7 +118,9 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                 {/* 商品画像 */}
                 <div className="space-y-4">
                     <div className="aspect-square bg-neutral-100 dark:bg-neutral-800 rounded-2xl overflow-hidden">
-                        <img
+                        <Image
+                            width="600"
+                            height="600"
                             src={images[selectedImageIndex] || product.thumbnail || ''}
                             alt={product.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -136,8 +145,10 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                                             : 'border-neutral-200 dark:border-neutral-700'
                                     }`}
                                 >
-                                    <img
-                                        src={image}
+                                    <Image
+                                        width="600"
+                                        height="600"
+                                        src={image || ''}
                                         alt={`${product.name} ${index + 1}`}
                                         className="w-full h-full object-cover"
                                     />
@@ -152,7 +163,7 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                     <div>
                         <div className="flex items-center gap-3 mb-2">
                             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                                {project?.className}
+                                3{project?.className}
                             </span>
                             {product.isSoldOut && (
                                 <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-bold">

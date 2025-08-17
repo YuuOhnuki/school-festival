@@ -2,6 +2,7 @@
 
 import { useScroll, useTransform, motion } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
+import { CometCard } from '@/components/ui/comet-card';
 
 interface TimelineEntry {
     title: string;
@@ -82,13 +83,15 @@ const EventCard = ({
     title: string;
     location: string;
     description: string;
-    type: 'opening' | 'event' | 'performance' | 'break' | 'closing' | 'special';
+    type: 'opening' | 'event' | 'performance' | 'band' | 'dance' | 'closing' | 'preparation' | 'special';
 }) => {
     const typeColors = {
         opening: 'bg-green-100 text-green-800 border-green-300',
         event: 'bg-blue-100 text-blue-800 border-blue-300',
         performance: 'bg-purple-100 text-purple-800 border-purple-300',
-        break: 'bg-orange-100 text-orange-800 border-orange-300',
+        preparation: 'bg-orange-100 text-orange-800 border-orange-300',
+        band: 'bg-purple-100 text-purple-800 border-purple-300',
+        dance: 'bg-purple-100 text-purple-800 border-purple-300',
         closing: 'bg-red-100 text-red-800 border-red-300',
         special: 'bg-yellow-100 text-yellow-800 border-yellow-300',
     };
@@ -97,39 +100,45 @@ const EventCard = ({
         opening: '🎪',
         event: '🎯',
         performance: '🎭',
-        break: '🍽️',
-        closing: '🎉',
+        band: '🥁',
+        dance: '🕺',
+        preparation: '⚙️',
         special: '⭐',
+        closing: '🎉',
     };
 
     return (
-        <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">{typeIcons[type]}</span>
-                <div className="flex-1">
-                    <div
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${typeColors[type]} mb-2`}
-                    >
-                        {type === 'opening' && '開会'}
-                        {type === 'event' && 'イベント'}
-                        {type === 'performance' && 'パフォーマンス'}
-                        {type === 'break' && '休憩'}
-                        {type === 'closing' && '閉会'}
-                        {type === 'special' && '特別企画'}
+        <CometCard>
+            <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-all duration-300 hover:scale-101">
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">{typeIcons[type]}</span>
+                    <div className="flex-1">
+                        <div
+                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${typeColors[type]} mb-2`}
+                        >
+                            {type === 'opening' && '開会'}
+                            {type === 'event' && '本部企画'}
+                            {type === 'performance' && 'パフォーマンス'}
+                            {type === 'dance' && 'ダンス'}
+                            {type === 'band' && 'バンド'}
+                            {type === 'preparation' && '準備'}
+                            {type === 'closing' && '閉会'}
+                            {type === 'special' && '特別企画'}
+                        </div>
+                        <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{time}</div>
                     </div>
-                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{time}</div>
                 </div>
+
+                <h4 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">{title}</h4>
+
+                <div className="flex items-center gap-2 mb-3">
+                    <span className="text-neutral-500">📍</span>
+                    <span className="text-neutral-600 dark:text-neutral-400 font-medium">{location}</span>
+                </div>
+
+                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
             </div>
-
-            <h4 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">{title}</h4>
-
-            <div className="flex items-center gap-2 mb-3">
-                <span className="text-neutral-500">📍</span>
-                <span className="text-neutral-600 dark:text-neutral-400 font-medium">{location}</span>
-            </div>
-
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
-        </div>
+        </CometCard>
     );
 };
 
@@ -137,18 +146,27 @@ const EventCard = ({
 const FestivalTimetable = () => {
     const [selectedDay, setSelectedDay] = useState<1 | 2>(1);
 
-    // 1日目のタイムテーブル
+    // 2日目のタイムテーブル
     const day1Schedule: TimelineEntry[] = [
         {
             title: '9:00',
             content: (
-                <EventCard
-                    time="9:00 - 9:30"
-                    title="開会式"
-                    location="体育館"
-                    description="厚木高校文化祭2024の開幕です！校長先生のご挨拶、実行委員長の挨拶、各クラス代表による意気込み発表を行います。"
-                    type="opening"
-                />
+                <div className="space-y-6">
+                    <EventCard
+                        time="9:10 - 9:25"
+                        title="開会式"
+                        location="中庭ステージ"
+                        description="開会式の説明。"
+                        type="opening"
+                    />
+                    <EventCard
+                        time="9:35 - 9:45"
+                        title="有志バンド"
+                        location="中庭ステージ"
+                        description="有志バンドの説明。"
+                        type="band"
+                    />
+                </div>
             ),
         },
         {
@@ -156,18 +174,39 @@ const FestivalTimetable = () => {
             content: (
                 <div className="space-y-6">
                     <EventCard
-                        time="10:00 - 12:00"
-                        title="各クラス企画開始"
-                        location="校内各所"
-                        description="いよいよ各クラスの企画がスタート！カフェ、お化け屋敷、ゲームコーナーなど、創意工夫に富んだ企画をお楽しみください。"
+                        time="10:15 - 10:30"
+                        title="ダンス①"
+                        location="中庭ステージ"
+                        description="有志団体"
+                        type="dance"
+                    />
+                    <EventCard
+                        time="10:40 - 10:55"
+                        title="ダンスドリル部"
+                        location="中庭ステージ"
+                        description="ダンスドリル部の説明"
+                        type="dance"
+                    />
+                </div>
+            ),
+        },
+        {
+            title: '11:00',
+            content: (
+                <div className="space-y-6">
+                    <EventCard
+                        time="11:05 - 11:30"
+                        title="歌うま選手権"
+                        location="中庭ステージ"
+                        description="歌うま選手権の説明。"
                         type="event"
                     />
                     <EventCard
-                        time="10:30 - 11:00"
-                        title="吹奏楽部 ウェルカムコンサート"
+                        time="11:40 - 12:10"
+                        title="ハモネプ"
                         location="中庭ステージ"
-                        description="文化祭を盛り上げる吹奏楽部による歓迎演奏会。ポップスからクラシックまで幅広いレパートリーでお出迎えします。"
-                        type="performance"
+                        description="ハモネプの説明。"
+                        type="event"
                     />
                 </div>
             ),
@@ -176,11 +215,11 @@ const FestivalTimetable = () => {
             title: '12:00',
             content: (
                 <EventCard
-                    time="12:00 - 13:00"
-                    title="昼食休憩"
-                    location="校内各所"
-                    description="各クラスの食べ物企画や持参したお弁当でランチタイム。友達と一緒に文化祭グルメを楽しみましょう。"
-                    type="break"
+                    time="12:20 - 12:55"
+                    title="ダンス②③"
+                    location="体育館"
+                    description="ダンス②③の説明。"
+                    type="dance"
                 />
             ),
         },
@@ -189,69 +228,64 @@ const FestivalTimetable = () => {
             content: (
                 <div className="space-y-6">
                     <EventCard
-                        time="13:00 - 15:00"
-                        title="午後の企画再開"
-                        location="校内各所"
-                        description="午後も各クラス企画が続きます。午前中に回れなかった企画にもぜひ足を運んでみてください。"
-                        type="event"
-                    />
-                    <EventCard
-                        time="13:30 - 14:30"
-                        title="ダンス部パフォーマンス"
-                        location="体育館"
-                        description="切れのあるダンスで会場を沸かせるダンス部の公演。今年のテーマは「青春」です。"
-                        type="performance"
-                    />
-                </div>
-            ),
-        },
-        {
-            title: '15:00',
-            content: (
-                <div className="space-y-6">
-                    <EventCard
-                        time="15:00 - 15:30"
-                        title="スペシャルゲスト登場"
+                        time="13:10 - 13:50"
+                        title="A-1グランプリ"
                         location="中庭ステージ"
-                        description="地元出身のシンガーソングライター「山田太郎」さんによるライブパフォーマンス！"
-                        type="special"
+                        description="A-1グランプリの説明。"
+                        type="event"
                     />
                     <EventCard
-                        time="15:30 - 16:30"
-                        title="各クラス企画最終時間"
-                        location="校内各所"
-                        description="1日目最後のチャンス！気になっていた企画に参加するなら今です。"
-                        type="event"
+                        time="13:40 -"
+                        title="新体育館会場"
+                        location="新体育館"
+                        description="新体育館会場の説明。"
+                        type="preparation"
                     />
                 </div>
             ),
         },
         {
-            title: '16:30',
+            title: '14:00',
             content: (
                 <EventCard
-                    time="16:30 - 17:00"
-                    title="1日目終了・片付け"
-                    location="校内各所"
-                    description="1日目お疲れ様でした！明日に向けて各クラス片付けを行います。一般来場者の皆様、ありがとうございました。"
-                    type="closing"
+                    time="14:00 - 14:30"
+                    title="ダンスドリル部"
+                    location="新体育館"
+                    description="ダンスドリル部の説明。"
+                    type="dance"
                 />
             ),
         },
     ];
 
-    // 2日目のタイムテーブル
+    // 1日目のタイムテーブル
     const day2Schedule: TimelineEntry[] = [
         {
-            title: '9:30',
+            title: '9:00',
             content: (
-                <EventCard
-                    time="9:30 - 10:00"
-                    title="2日目開始準備"
-                    location="校内各所"
-                    description="文化祭2日目がスタート！昨日以上に盛り上がる一日にしていきましょう。各クラス最終準備を行います。"
-                    type="opening"
-                />
+                <div className="space-y-6">
+                    <EventCard
+                        time="9:10 - 9:20"
+                        title="再開式"
+                        location="中庭ステージ"
+                        description="再開式の説明。"
+                        type="opening"
+                    />
+                    <EventCard
+                        time="9:35 - 10:05"
+                        title="うでずもう"
+                        location="中庭ステージ"
+                        description="うでずもうの説明。"
+                        type="event"
+                    />
+                    <EventCard
+                        time="9:45 -"
+                        title="新体育館会場"
+                        location="新体育館"
+                        description="新体育館会場の説明。"
+                        type="preparation"
+                    />
+                </div>
             ),
         },
         {
@@ -259,17 +293,38 @@ const FestivalTimetable = () => {
             content: (
                 <div className="space-y-6">
                     <EventCard
-                        time="10:00 - 12:00"
-                        title="各クラス企画開始（2日目）"
-                        location="校内各所"
-                        description="2日目も各クラス企画が元気にスタート！昨日の経験を活かしてさらにパワーアップした企画をお楽しみください。"
-                        type="event"
+                        time="10:20 - 10:50"
+                        title="仮装"
+                        location="中庭ステージ"
+                        description="仮装の説明。"
+                        type="dance"
                     />
                     <EventCard
-                        time="10:30 - 11:30"
-                        title="合唱部コンサート"
-                        location="音楽室"
-                        description="美しいハーモニーを奏でる合唱部による特別公演。心温まる歌声をお届けします。"
+                        time="10:40 - 10:55"
+                        title="吹奏楽部部"
+                        location="新体育館"
+                        description="吹奏楽部の説明"
+                        type="performance"
+                    />
+                </div>
+            ),
+        },
+        {
+            title: '11:00',
+            content: (
+                <div className="space-y-6">
+                    <EventCard
+                        time="11:10 - 11:45"
+                        title="ダンス④⑤"
+                        location="中庭ステージ"
+                        description="ダンス④⑤の説明。"
+                        type="dance"
+                    />
+                    <EventCard
+                        time="11:30 - 12:30"
+                        title="音楽部"
+                        location="新体育館"
+                        description="音楽部の説明。"
                         type="performance"
                     />
                 </div>
@@ -278,13 +333,22 @@ const FestivalTimetable = () => {
         {
             title: '12:00',
             content: (
-                <EventCard
-                    time="12:00 - 13:00"
-                    title="昼食休憩"
-                    location="校内各所"
-                    description="2日目のランチタイム。人気の食べ物企画は売り切れ前にお早めに！"
-                    type="break"
-                />
+                <div className="space-y-6">
+                    <EventCard
+                        time="12:00 - 12:25"
+                        title="ニコイチグランプリ"
+                        location="中庭ステージ"
+                        description="ニコイチグランプリの説明。"
+                        type="event"
+                    />
+                    <EventCard
+                        time="12:35 - 12:50"
+                        title="ダンスドリル部"
+                        location="中庭ステージ"
+                        description="ダンスドリル部の説明。"
+                        type="dance"
+                    />
+                </div>
             ),
         },
         {
@@ -292,72 +356,30 @@ const FestivalTimetable = () => {
             content: (
                 <div className="space-y-6">
                     <EventCard
-                        time="13:00 - 14:30"
-                        title="文化祭グランプリ投票開始"
-                        location="校内各所"
-                        description="最優秀企画を決める「文化祭グランプリ」の投票がスタート！お気に入りの企画に投票しよう。"
-                        type="special"
+                        time="13:05 - 13:35"
+                        title="ボディビル"
+                        location="中庭ステージ"
+                        description="ボディビルの説明。"
+                        type="event"
                     />
                     <EventCard
-                        time="13:30 - 14:00"
-                        title="軽音部ライブ"
-                        location="体育館"
-                        description="今年結成された軽音部による初のライブパフォーマンス。フレッシュな演奏をお聞きください。"
-                        type="performance"
-                    />
-                </div>
-            ),
-        },
-        {
-            title: '14:30',
-            content: (
-                <div className="space-y-6">
-                    <EventCard
-                        time="14:30 - 15:30"
-                        title="お笑い芸人「厚木兄弟」ライブ"
-                        location="体育館"
-                        description="地元で活動するお笑い芸人「厚木兄弟」による爆笑ライブ！会場が笑いの渦に包まれます。"
-                        type="special"
-                    />
-                    <EventCard
-                        time="15:00 - 15:30"
-                        title="投票締切・集計開始"
-                        location="本部"
-                        description="文化祭グランプリの投票が締め切られ、集計作業が開始されます。結果発表をお楽しみに！"
+                        time="13:40 - 14:15"
+                        title="未成年の主張"
+                        location="東側渡り廊下"
+                        description="未成年の主張の説明。"
                         type="event"
                     />
                 </div>
             ),
         },
         {
-            title: '15:30',
-            content: (
-                <div className="space-y-6">
-                    <EventCard
-                        time="15:30 - 16:00"
-                        title="各クラス企画終了"
-                        location="校内各所"
-                        description="2日間にわたる各クラス企画がいよいよ終了。皆様のご来場、ありがとうございました！"
-                        type="event"
-                    />
-                    <EventCard
-                        time="16:00 - 16:30"
-                        title="閉会式・結果発表"
-                        location="体育館"
-                        description="文化祭グランプリの結果発表と表彰式を行います。どのクラスが栄冠を手にするでしょうか？"
-                        type="special"
-                    />
-                </div>
-            ),
-        },
-        {
-            title: '16:30',
+            title: '14:00',
             content: (
                 <EventCard
-                    time="16:30 - 17:30"
-                    title="文化祭終了・片付け"
-                    location="校内各所"
-                    description="厚木高校文化祭2024、ついに終了です！2日間の思い出を胸に、片付け作業を行います。来年もお楽しみに！"
+                    time="14:30 - 14:40"
+                    title="閉祭式"
+                    location="中庭ステージ"
+                    description="閉祭式の説明。"
                     type="closing"
                 />
             ),
@@ -372,12 +394,12 @@ const FestivalTimetable = () => {
                     文化祭タイムテーブル
                 </h1>
                 <p className="text-neutral-700 dark:text-neutral-300 text-lg md:text-xl text-center max-w-3xl mx-auto mb-12">
-                    厚木高校文化祭2024の詳細スケジュール。見逃したくないイベントをチェックして、充実した2日間をお過ごしください！
+                    厚木高校文化祭2025の詳細スケジュール。
                 </p>
 
                 {/* Day Selector */}
                 <div className="flex justify-center mb-12">
-                    <div className="bg-white dark:bg-neutral-800 rounded-full p-2 shadow-lg border border-neutral-200 dark:border-neutral-700">
+                    <div className="bg-white dark:bg-neutral-800 rounded-full p-2 shadow-lg border border-neutral-200 dark:border-neutral-700 flex">
                         <button
                             onClick={() => setSelectedDay(1)}
                             className={`px-8 py-3 rounded-full font-bold transition-all duration-300 ${
@@ -406,7 +428,7 @@ const FestivalTimetable = () => {
                     <div className="inline-flex items-center gap-2 bg-white dark:bg-neutral-800 rounded-lg px-6 py-3 shadow-lg border border-neutral-200 dark:border-neutral-700">
                         <span className="text-2xl">📅</span>
                         <span className="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
-                            {selectedDay === 1 ? '2024年10月26日（土）' : '2024年10月27日（日）'}
+                            {selectedDay === 1 ? '2025年9月6日（土）' : '2025年9月7日（日）'}
                         </span>
                     </div>
                 </div>
@@ -444,7 +466,7 @@ const FestivalTimetable = () => {
                                 <span className="text-xl">🎫</span>
                                 <div>
                                     <h4 className="font-bold text-neutral-800 dark:text-neutral-200">入場料</h4>
-                                    <p className="text-neutral-600 dark:text-neutral-400">無料（一部企画は有料）</p>
+                                    <p className="text-neutral-600 dark:text-neutral-400">無料</p>
                                 </div>
                             </div>
                         </div>
@@ -454,15 +476,17 @@ const FestivalTimetable = () => {
                                 <div>
                                     <h4 className="font-bold text-neutral-800 dark:text-neutral-200">駐車場</h4>
                                     <p className="text-neutral-600 dark:text-neutral-400">
-                                        校内駐車場をご利用ください（台数限定）
+                                        本校に車で来校することはできません。
                                     </p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
-                                <span className="text-xl">📱</span>
+                                <span className="text-xl">☔</span>
                                 <div>
-                                    <h4 className="font-bold text-neutral-800 dark:text-neutral-200">お問い合わせ</h4>
-                                    <p className="text-neutral-600 dark:text-neutral-400">文化祭実行委員会まで</p>
+                                    <h4 className="font-bold text-neutral-800 dark:text-neutral-200">雨天</h4>
+                                    <p className="text-neutral-600 dark:text-neutral-400">
+                                        雨天の場合は会場場所の変更があります。
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
+import Image from 'next/image';
 
 interface ProductsListProps {
     products: Product[];
@@ -75,7 +76,7 @@ const ProductsList = ({ products, projects, onProductSelect }: ProductsListProps
                     <option value="">全てのプロジェクト</option>
                     {projects.map((project) => (
                         <option key={project.id} value={project.id}>
-                            {project.className}
+                            3{project.className}
                         </option>
                     ))}
                 </select>
@@ -95,7 +96,9 @@ const ProductsList = ({ products, projects, onProductSelect }: ProductsListProps
                         onClick={() => handleProductClick(product)}
                     >
                         <div className="relative">
-                            <img
+                            <Image
+                                width="600"
+                                height="600"
                                 src={product.thumbnail || ''}
                                 alt={product.name}
                                 className="w-full h-48 object-cover"

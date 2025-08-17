@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Product } from '@/types/types';
+import Image from 'next/image';
 
 interface TopProductsCarouselProps {
     products: Product[];
@@ -41,7 +42,9 @@ const TopProductsCarousel = ({ products, onProductSelect }: TopProductsCarouselP
                             onClick={() => handleProductClick(product)}
                         >
                             <div className="relative">
-                                <img
+                                <Image
+                                    width="600"
+                                    height="600"
                                     src={product.thumbnail || ''}
                                     alt={product.name}
                                     className="w-full h-48 object-cover"

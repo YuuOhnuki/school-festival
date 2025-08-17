@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Project } from '@/types/types';
+import Image from 'next/image';
 
 interface ProjectsListProps {
     projects: Project[];
@@ -25,13 +26,15 @@ const ProjectsList = ({ projects, onProjectSelect }: ProjectsListProps) => {
                         onClick={() => onProjectSelect(project)}
                     >
                         <div className="relative">
-                            <img
+                            <Image
+                                width="600"
+                                height="600"
                                 src={project.thumbnail || ''}
                                 alt={project.name}
                                 className="w-full h-48 object-cover"
                             />
                             <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                                {project.className}
+                                3{project.className}
                             </div>
                         </div>
                         <div className="p-6">
@@ -40,8 +43,7 @@ const ProjectsList = ({ projects, onProjectSelect }: ProjectsListProps) => {
                             </h3>
                             <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">{project.description}</p>
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-neutral-500">年度: {project.academicYear}</span>
-                                <span className="text-blue-600 font-medium">詳細を見る →</span>
+                                <span className="text-blue-600 font-medium">詳細を見る</span>
                             </div>
                         </div>
                     </motion.div>

@@ -19,7 +19,7 @@ const Navigation = ({ currentPage, setCurrentPage }: NavigationProps) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0">
-                        <h1 className="text-xl font-bold text-neutral-900 dark:text-white">厚木高校文化祭</h1>
+                        <h1 className="text-xl font-bold text-neutral-900 dark:text-white">厚木高校戸陵祭</h1>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">

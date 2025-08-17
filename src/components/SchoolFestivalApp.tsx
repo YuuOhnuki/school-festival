@@ -12,7 +12,6 @@ import ProjectsList from './ProjectsList';
 import ProjectDetail from './ProjectDetail';
 import ProductDetail from './ProductDetail';
 import FestivalTimetable from './FestivalTimetable';
-import SitePolicy from './SitePolicy';
 import Footer from './Footer';
 import { mockProjects, mockProducts } from '@/lib/mock-data';
 
@@ -93,9 +92,6 @@ const SchoolFestivalApp = () => {
                         onProductSelect={handleProductSelect}
                     />
                 ) : null;
-
-            case 'policy':
-                return <SitePolicy />;
 
             default:
                 return <div>ページが見つかりません</div>;

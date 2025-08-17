@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Project, Product } from '@/types/types';
+import Image from 'next/image';
 
 interface ProjectDetailProps {
     project: Project;
@@ -28,7 +29,9 @@ const ProjectDetail = ({ project, products, onBack, onProductSelect }: ProjectDe
 
             <div className="grid md:grid-cols-2 gap-12 mb-12">
                 <div>
-                    <img
+                    <Image
+                        width="600"
+                        height="600"
                         src={project.thumbnail || ''}
                         alt={project.name}
                         className="w-full h-96 object-cover rounded-xl shadow-lg"
@@ -42,9 +45,6 @@ const ProjectDetail = ({ project, products, onBack, onProductSelect }: ProjectDe
                     <div className="space-y-2">
                         <p>
                             <span className="font-semibold">クラス:</span> {project.className}
-                        </p>
-                        <p>
-                            <span className="font-semibold">年度:</span> {project.academicYear}
                         </p>
                     </div>
                 </div>
@@ -67,7 +67,9 @@ const ProjectDetail = ({ project, products, onBack, onProductSelect }: ProjectDe
                         onClick={() => handleProductClick(product)}
                     >
                         <div className="relative">
-                            <img
+                            <Image
+                                width="600"
+                                height="600"
                                 src={product.thumbnail || ''}
                                 alt={product.name}
                                 className="w-full h-48 object-cover"

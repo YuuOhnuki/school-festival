@@ -4,61 +4,61 @@ import { Project, Product } from '@/types/types';
 export const mockProjects: Project[] = [
     {
         id: 1,
-        name: '3-A カフェ「星空テラス」',
+        name: 'カフェ「星空テラス」',
         description:
             '星をテーマにしたおしゃれなカフェ。手作りスイーツとドリンクが自慢です。天体観測をイメージした幻想的な装飾の中で、特製メニューをお楽しみください。',
         thumbnail: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop',
-        className: '3-A',
+        className: 'A',
         academicYear: 2024,
         createdById: 'user1',
     },
     {
         id: 2,
-        name: '3-B 和食レストラン「桜庵」',
+        name: '和食レストラン「桜庵」',
         description:
             '本格的な和食を楽しめる落ち着いた雰囲気のレストラン。手打ちうどんや季節の天ぷらなど、こだわりの和食メニューを提供します。',
         thumbnail: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=800&h=600&fit=crop',
-        className: '3-B',
+        className: 'B',
         academicYear: 2024,
         createdById: 'user2',
     },
     {
         id: 3,
-        name: '3-C ピザ&パスタ「イタリア広場」',
+        name: 'ピザ&パスタ「イタリア広場」',
         description:
             '本格イタリアンが楽しめる陽気な雰囲気のお店。手作りピザと自慢のパスタで、イタリアの味をお届けします。',
         thumbnail: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&h=600&fit=crop',
-        className: '3-C',
+        className: 'C',
         academicYear: 2024,
         createdById: 'user3',
     },
     {
         id: 4,
-        name: '3-D スイーツパラダイス「甘味処」',
+        name: 'スイーツパラダイス「甘味処」',
         description:
             '手作りスイーツ専門店。季節のフルーツを使ったケーキやパフェ、伝統的な和菓子まで、甘いもの好きにはたまらないお店です。',
         thumbnail: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=600&fit=crop',
-        className: '3-D',
+        className: 'D',
         academicYear: 2024,
         createdById: 'user4',
     },
     {
         id: 5,
-        name: '3-E 韓国料理「ソウルキッチン」',
+        name: '韓国料理「ソウルキッチン」',
         description:
             '本場の韓国料理が味わえる人気店。チーズダッカルビやキンパなど、話題の韓国グルメを手軽に楽しめます。',
         thumbnail: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800&h=600&fit=crop',
-        className: '3-E',
+        className: 'E',
         academicYear: 2024,
         createdById: 'user5',
     },
     {
         id: 6,
-        name: '3-F ドリンクバー「リフレッシュステーション」',
+        name: 'ドリンクバー「リフレッシュステーション」',
         description:
             'オリジナルドリンクとフレッシュジュースの専門店。手作りタピオカドリンクや季節限定フレーバーが人気です。',
         thumbnail: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&h=600&fit=crop',
-        className: '3-F',
+        className: 'F',
         academicYear: 2024,
         createdById: 'user6',
     },

@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
 import { Product } from '@/types/types';
+import Image from 'next/image';
 
 interface HeroParallaxProps {
     products: Product[];
@@ -23,7 +24,7 @@ const ProductCard = ({ product, translate }: ProductCardProps) => {
             className="group/product h-96 w-[30rem] relative shrink-0"
         >
             <div className="block group-hover/product:shadow-2xl">
-                <img
+                <Image
                     src={product.thumbnail || ''}
                     height="600"
                     width="600"
@@ -68,11 +69,9 @@ const HeroParallax = ({ products }: HeroParallaxProps) => {
         >
             <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
                 <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-                    厚木高校 <br /> 文化祭2024
+                    厚木高校 <br /> 戸陵祭2025
                 </h1>
-                <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-                    学生たちの創造力と情熱が詰まった素晴らしいプロジェクトと商品をご紹介します。各クラスが心を込めて準備した企画をお楽しみください。
-                </p>
+                <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">文化祭</p>
             </div>
             <motion.div
                 style={{
