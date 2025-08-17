@@ -11,7 +11,6 @@ const Navigation = ({ currentPage, setCurrentPage }: NavigationProps) => {
         { id: 'products', label: '商品一覧' },
         { id: 'projects', label: 'プロジェクト一覧' },
         { id: 'timetable', label: 'タイムテーブル' },
-        { id: 'policy', label: 'サイトポリシー' },
     ];
 
     return (

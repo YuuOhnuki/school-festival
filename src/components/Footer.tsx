@@ -49,14 +49,6 @@ const Footer = ({ setCurrentPage }: FooterProps) => {
                                     タイムテーブル
                                 </button>
                             </li>
-                            <li>
-                                <button
-                                    onClick={() => setCurrentPage('policy')}
-                                    className="text-neutral-400 hover:text-white transition-colors"
-                                >
-                                    サイトポリシー
-                                </button>
-                            </li>
                         </ul>
                     </div>
                 </div>
