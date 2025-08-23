@@ -5,6 +5,8 @@ import { Product } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Badge } from '@/components/ui/badge';
+
 interface TopProductsCarouselProps {
     products: Product[];
 }
@@ -41,9 +43,9 @@ const TopProductsCarousel = ({ products }: TopProductsCarouselProps) => {
                                         alt={product.name}
                                         className="w-full h-48 object-cover"
                                     />
-                                    <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                    <Badge variant="default" className="absolute top-4 left-4 px-2 font-bold text-sm">
                                         #{index + 1}
-                                    </div>
+                                    </Badge>
                                     {product.isSoldOut && (
                                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                                             <span className="text-white font-bold text-lg">売り切れ</span>

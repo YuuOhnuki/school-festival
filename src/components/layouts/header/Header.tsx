@@ -12,15 +12,15 @@ import { MobileNavMenu } from './navigations/mobile/MobileNavMenu';
 export function Header() {
     const navItems = [
         {
-            name: 'Home',
+            name: 'ホーム',
             link: '/',
         },
         {
-            name: 'Projects',
+            name: 'プロジェクト',
             link: '/projects',
         },
         {
-            name: 'Products',
+            name: '商品',
             link: '/products',
         },
     ];

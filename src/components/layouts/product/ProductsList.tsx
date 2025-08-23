@@ -5,6 +5,8 @@ import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ProductsListProps {
     products: Product[];
@@ -39,37 +41,43 @@ const ProductsList = ({ products, projects }: ProductsListProps) => {
     return (
         <div>
             {/* Filters */}
-            <div className="mb-8 flex flex-wrap gap-4 justify-center">
-                <input
+            <div className="mb-4 flex flex-col xl:flex-row gap-2 justify-center">
+                <Input
                     type="text"
                     placeholder="商品名で検索..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
+                    className="w-full"
                 />
+                <div className="flex gap-2">
+                    <Select value={sortBy} onValueChange={(value) => setSortBy(value as 'name' | 'price' | 'sales')}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="sales">売上順</SelectItem>
+                            <SelectItem value="name">名前順</SelectItem>
+                            <SelectItem value="price">価格順</SelectItem>
+                        </SelectContent>
+                    </Select>
 
-                <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'sales')}
-                    className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
-                >
-                    <option value="sales">売上順</option>
-                    <option value="name">名前順</option>
-                    <option value="price">価格順</option>
-                </select>
-
-                <select
-                    value={filterProject || ''}
-                    onChange={(e) => setFilterProject(e.target.value ? parseInt(e.target.value) : null)}
-                    className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white"
-                >
-                    <option value="">全てのプロジェクト</option>
-                    {projects.map((project) => (
-                        <option key={project.id} value={project.id}>
-                            3{project.className}
-                        </option>
-                    ))}
-                </select>
+                    <Select
+                        value={filterProject !== null ? String(filterProject) : 'all'}
+                        onValueChange={(value) => setFilterProject(value === 'all' ? null : parseInt(value, 10))}
+                    >
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="プロジェクトで絞り込み" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">全て</SelectItem>
+                            {projects.map((project) => (
+                                <SelectItem key={project.id} value={String(project.id)}>
+                                    {project.className}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
             </div>
 
             {/* Products Grid */}
