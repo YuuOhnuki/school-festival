@@ -5,6 +5,9 @@ import { Project, Product } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// 作成したBackButtonコンポーネントをインポート
+import { BackButton } from '@/components/BackButton';
+
 interface ProjectDetailProps {
     project: Project;
     products: Product[];
@@ -16,7 +19,7 @@ const ProjectDetail = ({ project, products }: ProjectDetailProps) => {
 
     return (
         <div>
-            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium">← 戻る</button>
+            <BackButton />
 
             <div className="grid md:grid-cols-2 gap-12 mb-12">
                 <div>

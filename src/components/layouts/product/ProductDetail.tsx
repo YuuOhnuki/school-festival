@@ -6,6 +6,7 @@ import { Product, Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { BackButton } from '@/components/BackButton';
 
 interface ProductDetailProps {
     product: Product;
@@ -97,14 +98,11 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
 
     return (
         <div>
-            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group">
-                <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span>
-                戻る
-            </button>
+            <BackButton />
 
             <div className="grid lg:grid-cols-2 gap-4">
                 {product.isSoldOut && (
-                    <Alert variant="destructive" className="col-span-2 bg-red-50">
+                    <Alert variant="destructive" className="lg:col-span-2 col-span-1 bg-red-50">
                         <AlertTitle className="font-bold text-xl">売り切れ中</AlertTitle>
                         <AlertDescription>この商品は現在売り切れ中です。</AlertDescription>
                     </Alert>
