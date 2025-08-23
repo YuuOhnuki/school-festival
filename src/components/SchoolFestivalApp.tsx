@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project, Product } from '@/types/types';
 import HeroParallax from './HeroParallax';
-import ProjectTabs from './ProjectTabs';
+import ProjectTabs from './layouts/project/ProjectTabs';
 import TopProductsCarousel from './TopProductsCarousel';
-import ProductsList from './ProductsList';
-import ProjectsList from './ProjectsList';
-import ProjectDetail from './ProjectDetail';
-import ProductDetail from './ProductDetail';
+import ProductsList from './layouts/product/ProductsList';
+import ProjectsList from './layouts/project/ProjectsList';
+import ProjectDetail from './layouts/project/ProjectDetail';
+import ProductDetail from './layouts/product/ProductDetail';
 import FestivalTimetable from './FestivalTimetable';
 import { mockProjects, mockProducts } from '@/lib/mock-data';
 
@@ -28,13 +28,6 @@ const SchoolFestivalApp = () => {
     const handleProductSelect = (product: Product) => {
         setSelectedProduct(product);
         setCurrentPage('product-detail');
-    };
-
-    // Handle back to home from project detail
-    const handleBackToHome = () => {
-        setSelectedProject(null);
-        setSelectedProduct(null);
-        setCurrentPage('home');
     };
 
     // Handle back to products from product detail
@@ -65,14 +58,7 @@ const SchoolFestivalApp = () => {
                 return <FestivalTimetable />;
 
             case 'project-detail':
-                return selectedProject ? (
-                    <ProjectDetail
-                        project={selectedProject}
-                        products={mockProducts}
-                        onBack={handleBackToHome}
-                        onProductSelect={handleProductSelect}
-                    />
-                ) : null;
+                return selectedProject ? <ProjectDetail project={selectedProject} products={mockProducts} /> : null;
 
             case 'product-detail':
                 return selectedProduct ? (

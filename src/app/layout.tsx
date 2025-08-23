@@ -4,7 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
 import { Zen_Kaku_Gothic_New } from 'next/font/google';
-import Footer from '@/components/Footer';
+import Footer from '@/components/layouts/footer/Footer';
 import { Header } from '@/components/layouts/header/Header';
 
 const RampartOneFont = Zen_Kaku_Gothic_New({

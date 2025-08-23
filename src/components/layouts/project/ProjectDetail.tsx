@@ -7,25 +7,15 @@ import Image from 'next/image';
 interface ProjectDetailProps {
     project: Project;
     products: Product[];
-    onBack: () => void;
-    onProductSelect?: (product: Product) => void;
 }
 
-const ProjectDetail = ({ project, products, onBack, onProductSelect }: ProjectDetailProps) => {
+const ProjectDetail = ({ project, products }: ProjectDetailProps) => {
     // Get products for this project
     const projectProducts = products.filter((product) => product.projectId === project.id);
 
-    const handleProductClick = (product: Product) => {
-        if (onProductSelect) {
-            onProductSelect(product);
-        }
-    };
-
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-20">
-            <button onClick={onBack} className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium">
-                ← 戻る
-            </button>
+        <div>
+            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium">← 戻る</button>
 
             <div className="grid md:grid-cols-2 gap-12 mb-12">
                 <div>
@@ -61,10 +51,7 @@ const ProjectDetail = ({ project, products, onBack, onProductSelect }: ProjectDe
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className={`bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105 ${
-                            onProductSelect ? 'cursor-pointer' : ''
-                        }`}
-                        onClick={() => handleProductClick(product)}
+                        className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105"
                     >
                         <div className="relative">
                             <Image
