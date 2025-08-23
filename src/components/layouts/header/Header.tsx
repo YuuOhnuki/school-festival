@@ -23,6 +23,10 @@ export function Header() {
             name: '商品',
             link: '/products',
         },
+        {
+            name: 'タイムテーブル',
+            link: '/timetable',
+        },
     ];
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

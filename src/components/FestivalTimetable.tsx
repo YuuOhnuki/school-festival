@@ -384,7 +384,7 @@ const FestivalTimetable = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-neutral-950 dark:to-neutral-900">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-neutral-950 dark:to-neutral-900">
             {/* Header */}
             <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
                 <h1 className="text-3xl md:text-6xl font-bold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

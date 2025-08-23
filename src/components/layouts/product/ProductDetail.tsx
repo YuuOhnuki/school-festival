@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface ProductDetailProps {
     product: Product;
@@ -101,7 +102,13 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                 戻る
             </button>
 
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-2 gap-4">
+                {product.isSoldOut && (
+                    <Alert variant="destructive" className="col-span-2 bg-red-50">
+                        <AlertTitle className="font-bold text-xl">売り切れ中</AlertTitle>
+                        <AlertDescription>この商品は現在売り切れ中です。</AlertDescription>
+                    </Alert>
+                )}
                 {/* 商品画像 */}
                 <div className="space-y-4">
                     <div className="aspect-square bg-neutral-100 dark:bg-neutral-800 rounded-2xl overflow-hidden">
@@ -112,11 +119,6 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                             alt={product.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         />
-                        {product.isSoldOut && (
-                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="text-white font-bold text-2xl">売り切れ</span>
-                            </div>
-                        )}
                     </div>
 
                     {/* サムネイル */}
@@ -152,11 +154,6 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                                 3{project?.className}
                             </span>
-                            {product.isSoldOut && (
-                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-bold">
-                                    売り切れ
-                                </span>
-                            )}
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
                             {product.name}
@@ -278,10 +275,10 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                                 </p>
                             </div>
                         ) : (
-                            <div className="bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 px-4 py-3 rounded-lg">
+                            <div className="px-2 rounded-lg">
                                 <div className="flex items-center gap-2">
                                     <span>✅</span>
-                                    <span className="font-medium">主要アレルゲン不使用</span>
+                                    <span className="font-bold">主要アレルゲン不使用</span>
                                 </div>
                                 <p className="text-sm mt-1">この商品には主要8品目のアレルゲンは含まれていません。</p>
                             </div>
@@ -304,9 +301,8 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                                 </div>
                                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
                                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded font-medium">
-                                        {project.className}
+                                        3年{project.className}組
                                     </span>
-                                    <span>年度: {project.academicYear}</span>
                                 </div>
                             </div>
                         </div>
