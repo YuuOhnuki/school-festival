@@ -2,7 +2,6 @@
 
 import { useScroll, useTransform, motion } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { CometCard } from '@/components/ui/comet-card';
 
 interface TimelineEntry {
     title: string;
@@ -108,37 +107,35 @@ const EventCard = ({
     };
 
     return (
-        <CometCard>
-            <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 hover:scale-101">
-                <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl">{typeIcons[type]}</span>
-                    <div className="flex-1">
-                        <div
-                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${typeColors[type]} mb-2`}
-                        >
-                            {type === 'opening' && '開会'}
-                            {type === 'event' && '本部企画'}
-                            {type === 'performance' && 'パフォーマンス'}
-                            {type === 'dance' && 'ダンス'}
-                            {type === 'band' && 'バンド'}
-                            {type === 'preparation' && '準備'}
-                            {type === 'closing' && '閉会'}
-                            {type === 'special' && '特別企画'}
-                        </div>
-                        <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{time}</div>
+        <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 hover:scale-101">
+            <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">{typeIcons[type]}</span>
+                <div className="flex-1">
+                    <div
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${typeColors[type]} mb-2`}
+                    >
+                        {type === 'opening' && '開会'}
+                        {type === 'event' && '本部企画'}
+                        {type === 'performance' && 'パフォーマンス'}
+                        {type === 'dance' && 'ダンス'}
+                        {type === 'band' && 'バンド'}
+                        {type === 'preparation' && '準備'}
+                        {type === 'closing' && '閉会'}
+                        {type === 'special' && '特別企画'}
                     </div>
+                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{time}</div>
                 </div>
-
-                <h4 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">{title}</h4>
-
-                <div className="flex items-center gap-2 mb-3">
-                    <span className="text-neutral-500">📍</span>
-                    <span className="text-neutral-600 dark:text-neutral-400 font-medium">{location}</span>
-                </div>
-
-                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
             </div>
-        </CometCard>
+
+            <h4 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">{title}</h4>
+
+            <div className="flex items-center gap-2 mb-3">
+                <span className="text-neutral-500">📍</span>
+                <span className="text-neutral-600 dark:text-neutral-400 font-medium">{location}</span>
+            </div>
+
+            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
+        </div>
     );
 };
 
