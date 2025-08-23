@@ -6,6 +6,7 @@ import { Product, Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { BackButton } from '@/components/BackButton';
 
 interface ProductDetailProps {
     product: Product;
@@ -97,10 +98,7 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
 
     return (
         <div>
-            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group">
-                <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span>
-                戻る
-            </button>
+            <BackButton />
 
             <div className="grid lg:grid-cols-2 gap-4">
                 {product.isSoldOut && (
