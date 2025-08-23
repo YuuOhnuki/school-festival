@@ -5,16 +5,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '@/types/types';
 import Image from 'next/image';
 
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
 interface ProjectTabsProps {
     projects: Project[];
-    onProjectSelect: (project: Project) => void;
 }
 
-const ProjectTabs = ({ projects, onProjectSelect }: ProjectTabsProps) => {
+const ProjectTabs = ({ projects }: ProjectTabsProps) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-20">
+        <div className="w-full max-w-7xl mx-auto px-4 py-10">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-neutral-800 dark:text-neutral-200">
                 プロジェクト紹介
             </h2>
@@ -25,7 +27,7 @@ const ProjectTabs = ({ projects, onProjectSelect }: ProjectTabsProps) => {
                     <button
                         key={project.id}
                         onClick={() => setActiveTab(index)}
-                        className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                        className={`px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer ${
                             activeTab === index
                                 ? 'bg-blue-600 text-white shadow-lg'
                                 : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600'
@@ -63,12 +65,11 @@ const ProjectTabs = ({ projects, onProjectSelect }: ProjectTabsProps) => {
                             <p className="text-neutral-600 dark:text-neutral-400 mb-6">
                                 {projects[activeTab].description}
                             </p>
-                            <button
-                                onClick={() => onProjectSelect(projects[activeTab])}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                            >
-                                詳細を見る
-                            </button>
+                            <Link href={`/projects/${projects[activeTab].id}`}>
+                                <Button variant="default" className="p-6 font-medium w-full cursor-pointer">
+                                    詳細を見る
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </motion.div>

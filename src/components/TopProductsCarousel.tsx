@@ -6,21 +6,14 @@ import Image from 'next/image';
 
 interface TopProductsCarouselProps {
     products: Product[];
-    onProductSelect?: (product: Product) => void;
 }
 
-const TopProductsCarousel = ({ products, onProductSelect }: TopProductsCarouselProps) => {
+const TopProductsCarousel = ({ products }: TopProductsCarouselProps) => {
     // Sort products by sales in descending order and take top 6
     const topProducts = [...products].sort((a, b) => b.sales - a.sales).slice(0, 6);
 
-    const handleProductClick = (product: Product) => {
-        if (onProductSelect) {
-            onProductSelect(product);
-        }
-    };
-
     return (
-        <div className="w-full py-20 bg-neutral-50 dark:bg-neutral-900">
+        <div className="w-full py-10 bg-neutral-50 dark:bg-neutral-900">
             <div className="max-w-7xl mx-auto px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-center mb-4 text-neutral-800 dark:text-neutral-200">
                     人気商品ランキング
@@ -36,10 +29,7 @@ const TopProductsCarousel = ({ products, onProductSelect }: TopProductsCarouselP
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow ${
-                                onProductSelect ? 'cursor-pointer hover:scale-105 transition-transform' : ''
-                            }`}
-                            onClick={() => handleProductClick(product)}
+                            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                         >
                             <div className="relative">
                                 <Image

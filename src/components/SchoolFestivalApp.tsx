@@ -39,26 +39,8 @@ const SchoolFestivalApp = () => {
     // Render current page content
     const renderPageContent = () => {
         switch (currentPage) {
-            case 'home':
-                return (
-                    <>
-                        <HeroParallax products={mockProducts} />
-                        <ProjectTabs projects={mockProjects} onProjectSelect={handleProjectSelect} />
-                        <TopProductsCarousel products={mockProducts} onProductSelect={handleProductSelect} />
-                    </>
-                );
-
-            case 'products':
-                return <ProductsList products={mockProducts} projects={mockProjects} />;
-
-            case 'projects':
-                return <ProjectsList projects={mockProjects} />;
-
             case 'timetable':
                 return <FestivalTimetable />;
-
-            case 'project-detail':
-                return selectedProject ? <ProjectDetail project={selectedProject} products={mockProducts} /> : null;
 
             case 'product-detail':
                 return selectedProduct ? (

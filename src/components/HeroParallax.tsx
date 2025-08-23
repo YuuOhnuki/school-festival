@@ -19,7 +19,7 @@ const ProductCard = ({ product, translate }: ProductCardProps) => {
     return (
         <motion.div
             style={{ x: translate }}
-            whileHover={{ y: -20 }}
+            whileHover={{ y: -15 }}
             key={product.name}
             className="group/product h-96 w-[30rem] relative shrink-0"
         >
@@ -55,12 +55,12 @@ const HeroParallax = ({ products }: HeroParallaxProps) => {
 
     const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
-    const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 1000]), springConfig);
-    const translateXReverse = useSpring(useTransform(scrollYProgress, [0, 1], [0, -1000]), springConfig);
+    const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 800]), springConfig);
+    const translateXReverse = useSpring(useTransform(scrollYProgress, [0, 1], [0, -800]), springConfig);
     const rotateX = useSpring(useTransform(scrollYProgress, [0, 0.2], [15, 0]), springConfig);
     const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.2, 1]), springConfig);
     const rotateZ = useSpring(useTransform(scrollYProgress, [0, 0.2], [20, 0]), springConfig);
-    const translateY = useSpring(useTransform(scrollYProgress, [0, 0.2], [-700, 500]), springConfig);
+    const translateY = useSpring(useTransform(scrollYProgress, [0, 0.2], [-700, 300]), springConfig);
 
     return (
         <div
@@ -82,12 +82,12 @@ const HeroParallax = ({ products }: HeroParallaxProps) => {
                 }}
                 className=""
             >
-                <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+                <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-10">
                     {firstRow.map((product) => (
                         <ProductCard product={product} translate={translateX} key={product.name} />
                     ))}
                 </motion.div>
-                <motion.div className="flex flex-row mb-20 space-x-20">
+                <motion.div className="flex flex-row mb-10 space-x-20">
                     {secondRow.map((product) => (
                         <ProductCard product={product} translate={translateXReverse} key={product.name} />
                     ))}
