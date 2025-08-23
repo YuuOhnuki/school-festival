@@ -7,6 +7,8 @@ import { Zen_Kaku_Gothic_New } from 'next/font/google';
 import Footer from '@/components/layouts/footer/Footer';
 import { Header } from '@/components/layouts/header/Header';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 const RampartOneFont = Zen_Kaku_Gothic_New({
     weight: '500',
     subsets: ['latin'],
@@ -25,6 +27,7 @@ export default function RootLayout({
         <html lang="ja">
             <SpeedInsights />
             <Analytics />
+            <GoogleAnalytics gaId="G-BMTV5VPTKJ" />
             <body className={`${RampartOneFont.className} antialiased`}>
                 <Header />
                 {children}
