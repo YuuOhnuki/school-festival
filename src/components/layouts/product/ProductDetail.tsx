@@ -9,8 +9,6 @@ interface ProductDetailProps {
     product: Product;
     projects: Project[];
     products: Product[];
-    onBack: () => void;
-    onProductSelect?: (product: Product) => void;
 }
 
 // Related Products Component
@@ -18,12 +16,10 @@ const RelatedProducts = ({
     currentProductId,
     projectId,
     products,
-    onProductSelect,
 }: {
     currentProductId: number;
     projectId: number;
     products: Product[];
-    onProductSelect?: (product: Product) => void;
 }) => {
     const relatedProducts = products
         .filter((product) => product.projectId === projectId && product.id !== currentProductId)
@@ -33,12 +29,6 @@ const RelatedProducts = ({
         return <div className="text-center py-8 text-neutral-500">同じお店の他の商品はありません</div>;
     }
 
-    const handleProductClick = (product: Product) => {
-        if (onProductSelect) {
-            onProductSelect(product);
-        }
-    };
-
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedProducts.map((product, index) => (
@@ -47,10 +37,7 @@ const RelatedProducts = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className={`bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105 ${
-                        onProductSelect ? 'cursor-pointer' : ''
-                    }`}
-                    onClick={() => handleProductClick(product)}
+                    className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105"
                 >
                     <div className="relative">
                         <Image
@@ -84,7 +71,7 @@ const RelatedProducts = ({
     );
 };
 
-const ProductDetail = ({ product, projects, products, onBack, onProductSelect }: ProductDetailProps) => {
+const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const project = projects.find((p) => p.id === product.projectId);
 
@@ -105,11 +92,8 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
     const images = product.images.length > 0 ? product.images : [product.thumbnail].filter(Boolean);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-20">
-            <button
-                onClick={onBack}
-                className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group"
-            >
+        <div>
+            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group">
                 <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span>
                 戻る
             </button>
@@ -358,12 +342,7 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-neutral-800 dark:text-neutral-200">
                     同じお店の他の商品
                 </h2>
-                <RelatedProducts
-                    currentProductId={product.id}
-                    projectId={product.projectId}
-                    products={products}
-                    onProductSelect={onProductSelect}
-                />
+                <RelatedProducts currentProductId={product.id} projectId={product.projectId} products={products} />
             </div>
         </div>
     );
