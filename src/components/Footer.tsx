@@ -1,10 +1,8 @@
 'use client';
 
-interface FooterProps {
-    setCurrentPage: (page: string) => void;
-}
+import Link from 'next/link';
 
-const Footer = ({ setCurrentPage }: FooterProps) => {
+const Footer = () => {
     return (
         <footer className="bg-neutral-900 text-white py-12">
             <div className="max-w-7xl mx-auto px-4">
@@ -18,36 +16,24 @@ const Footer = ({ setCurrentPage }: FooterProps) => {
                         <h4 className="text-lg font-semibold mb-4">リンク</h4>
                         <ul className="space-y-2">
                             <li>
-                                <button
-                                    onClick={() => setCurrentPage('home')}
-                                    className="text-neutral-400 hover:text-white transition-colors"
-                                >
+                                <Link href="/" className="text-neutral-400 hover:text-white transition-colors">
                                     ホーム
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <button
-                                    onClick={() => setCurrentPage('products')}
-                                    className="text-neutral-400 hover:text-white transition-colors"
-                                >
-                                    商品一覧
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    onClick={() => setCurrentPage('projects')}
-                                    className="text-neutral-400 hover:text-white transition-colors"
-                                >
+                                <Link href="/projects" className="text-neutral-400 hover:text-white transition-colors">
                                     プロジェクト一覧
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <button
-                                    onClick={() => setCurrentPage('timetable')}
-                                    className="text-neutral-400 hover:text-white transition-colors"
-                                >
+                                <Link href="/products" className="text-neutral-400 hover:text-white transition-colors">
+                                    商品一覧
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/timetable" className="text-neutral-400 hover:text-white transition-colors">
                                     タイムテーブル
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>

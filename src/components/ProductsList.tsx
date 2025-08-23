@@ -8,10 +8,9 @@ import Image from 'next/image';
 interface ProductsListProps {
     products: Product[];
     projects: Project[];
-    onProductSelect?: (product: Product) => void;
 }
 
-const ProductsList = ({ products, projects, onProductSelect }: ProductsListProps) => {
+const ProductsList = ({ products, projects }: ProductsListProps) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState<'name' | 'price' | 'sales'>('sales');
     const [filterProject, setFilterProject] = useState<number | null>(null);
@@ -36,18 +35,8 @@ const ProductsList = ({ products, projects, onProductSelect }: ProductsListProps
             }
         });
 
-    const handleProductClick = (product: Product) => {
-        if (onProductSelect) {
-            onProductSelect(product);
-        }
-    };
-
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-20">
-            <h1 className="text-3xl md:text-5xl font-bold text-center mb-12 text-neutral-800 dark:text-neutral-200">
-                商品一覧
-            </h1>
-
+        <div>
             {/* Filters */}
             <div className="mb-8 flex flex-wrap gap-4 justify-center">
                 <input
@@ -90,10 +79,7 @@ const ProductsList = ({ products, projects, onProductSelect }: ProductsListProps
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
-                        className={`bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105 ${
-                            onProductSelect ? 'cursor-pointer' : ''
-                        }`}
-                        onClick={() => handleProductClick(product)}
+                        className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105"
                     >
                         <div className="relative">
                             <Image

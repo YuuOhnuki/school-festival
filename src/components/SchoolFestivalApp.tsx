@@ -58,16 +58,10 @@ const SchoolFestivalApp = () => {
                 );
 
             case 'products':
-                return (
-                    <ProductsList
-                        products={mockProducts}
-                        projects={mockProjects}
-                        onProductSelect={handleProductSelect}
-                    />
-                );
+                return <ProductsList products={mockProducts} projects={mockProjects} />;
 
             case 'projects':
-                return <ProjectsList projects={mockProjects} onProjectSelect={handleProjectSelect} />;
+                return <ProjectsList projects={mockProjects} />;
 
             case 'timetable':
                 return <FestivalTimetable />;
@@ -100,8 +94,6 @@ const SchoolFestivalApp = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-neutral-950">
-            <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-
             {/* Main content with top padding for fixed navigation */}
             <main className="pt-16">
                 <AnimatePresence mode="wait">
@@ -116,8 +108,6 @@ const SchoolFestivalApp = () => {
                     </motion.div>
                 </AnimatePresence>
             </main>
-
-            <Footer setCurrentPage={setCurrentPage} />
         </div>
     );
 };
