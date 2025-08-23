@@ -12,6 +12,10 @@ import { MobileNavMenu } from './navigations/mobile/MobileNavMenu';
 export function Header() {
     const navItems = [
         {
+            name: 'Home',
+            link: '/',
+        },
+        {
             name: 'Projects',
             link: '/projects',
         },

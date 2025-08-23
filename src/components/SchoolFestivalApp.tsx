@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project, Product } from '@/types/types';
-import Navigation from './Navigation';
 import HeroParallax from './HeroParallax';
 import ProjectTabs from './ProjectTabs';
 import TopProductsCarousel from './TopProductsCarousel';
@@ -12,7 +11,6 @@ import ProjectsList from './ProjectsList';
 import ProjectDetail from './ProjectDetail';
 import ProductDetail from './ProductDetail';
 import FestivalTimetable from './FestivalTimetable';
-import Footer from './Footer';
 import { mockProjects, mockProducts } from '@/lib/mock-data';
 
 const SchoolFestivalApp = () => {
