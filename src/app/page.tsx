@@ -1,5 +1,14 @@
-import SchoolFestivalApp from '@/components/SchoolFestivalApp';
+import HeroParallax from '@/components/HeroParallax';
+import ProjectTabs from '@/components/layouts/project/ProjectTabs';
+import TopProductsCarousel from '@/components/TopProductsCarousel';
+import { mockProducts, mockProjects } from '@/lib/mock-data';
 
-export default function Home() {
-    return <SchoolFestivalApp />;
+export default function Page() {
+    return (
+        <div>
+            <HeroParallax products={mockProducts} />
+            <ProjectTabs projects={mockProjects} />
+            <TopProductsCarousel products={mockProducts} />
+        </div>
+    );
 }

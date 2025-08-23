@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface ProductDetailProps {
     product: Product;
     projects: Project[];
     products: Product[];
-    onBack: () => void;
-    onProductSelect?: (product: Product) => void;
 }
 
 // Related Products Component
@@ -18,12 +18,10 @@ const RelatedProducts = ({
     currentProductId,
     projectId,
     products,
-    onProductSelect,
 }: {
     currentProductId: number;
     projectId: number;
     products: Product[];
-    onProductSelect?: (product: Product) => void;
 }) => {
     const relatedProducts = products
         .filter((product) => product.projectId === projectId && product.id !== currentProductId)
@@ -33,12 +31,6 @@ const RelatedProducts = ({
         return <div className="text-center py-8 text-neutral-500">同じお店の他の商品はありません</div>;
     }
 
-    const handleProductClick = (product: Product) => {
-        if (onProductSelect) {
-            onProductSelect(product);
-        }
-    };
-
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedProducts.map((product, index) => (
@@ -47,44 +39,43 @@ const RelatedProducts = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className={`bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105 ${
-                        onProductSelect ? 'cursor-pointer' : ''
-                    }`}
-                    onClick={() => handleProductClick(product)}
+                    className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105"
                 >
-                    <div className="relative">
-                        <Image
-                            width="600"
-                            height="600"
-                            src={product.thumbnail || ''}
-                            alt={product.name}
-                            className="w-full h-48 object-cover"
-                        />
-                        {product.isSoldOut && (
-                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="text-white font-bold">売り切れ</span>
-                            </div>
-                        )}
-                    </div>
-                    <div className="p-4">
-                        <h3 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">
-                            {product.name}
-                        </h3>
-                        <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
-                            {product.description}
-                        </p>
-                        <div className="flex justify-between items-center">
-                            <span className="text-xl font-bold text-blue-600">¥{product.price}</span>
-                            <span className="text-sm text-neutral-500">売上: {product.sales}</span>
+                    <Link href={`/products/${product.id}`}>
+                        <div className="relative">
+                            <Image
+                                width="600"
+                                height="600"
+                                src={product.thumbnail || ''}
+                                alt={product.name}
+                                className="w-full h-48 object-cover"
+                            />
+                            {product.isSoldOut && (
+                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <span className="text-white font-bold">売り切れ</span>
+                                </div>
+                            )}
                         </div>
-                    </div>
+                        <div className="p-4">
+                            <h3 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">
+                                {product.name}
+                            </h3>
+                            <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
+                                {product.description}
+                            </p>
+                            <div className="flex justify-between items-center">
+                                <span className="text-xl font-bold text-blue-600">¥{product.price}</span>
+                                <span className="text-sm text-neutral-500">売上: {product.sales}</span>
+                            </div>
+                        </div>
+                    </Link>
                 </motion.div>
             ))}
         </div>
     );
 };
 
-const ProductDetail = ({ product, projects, products, onBack, onProductSelect }: ProductDetailProps) => {
+const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const project = projects.find((p) => p.id === product.projectId);
 
@@ -105,16 +96,19 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
     const images = product.images.length > 0 ? product.images : [product.thumbnail].filter(Boolean);
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-20">
-            <button
-                onClick={onBack}
-                className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group"
-            >
+        <div>
+            <button className="mb-8 flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors group">
                 <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span>
                 戻る
             </button>
 
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-2 gap-4">
+                {product.isSoldOut && (
+                    <Alert variant="destructive" className="col-span-2 bg-red-50">
+                        <AlertTitle className="font-bold text-xl">売り切れ中</AlertTitle>
+                        <AlertDescription>この商品は現在売り切れ中です。</AlertDescription>
+                    </Alert>
+                )}
                 {/* 商品画像 */}
                 <div className="space-y-4">
                     <div className="aspect-square bg-neutral-100 dark:bg-neutral-800 rounded-2xl overflow-hidden">
@@ -125,11 +119,6 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                             alt={product.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         />
-                        {product.isSoldOut && (
-                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="text-white font-bold text-2xl">売り切れ</span>
-                            </div>
-                        )}
                     </div>
 
                     {/* サムネイル */}
@@ -165,11 +154,6 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                                 3{project?.className}
                             </span>
-                            {product.isSoldOut && (
-                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-bold">
-                                    売り切れ
-                                </span>
-                            )}
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
                             {product.name}
@@ -291,10 +275,10 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                                 </p>
                             </div>
                         ) : (
-                            <div className="bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 px-4 py-3 rounded-lg">
+                            <div className="px-2 rounded-lg">
                                 <div className="flex items-center gap-2">
                                     <span>✅</span>
-                                    <span className="font-medium">主要アレルゲン不使用</span>
+                                    <span className="font-bold">主要アレルゲン不使用</span>
                                 </div>
                                 <p className="text-sm mt-1">この商品には主要8品目のアレルゲンは含まれていません。</p>
                             </div>
@@ -317,9 +301,8 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                                 </div>
                                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
                                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded font-medium">
-                                        {project.className}
+                                        3年{project.className}組
                                     </span>
-                                    <span>年度: {project.academicYear}</span>
                                 </div>
                             </div>
                         </div>
@@ -358,12 +341,7 @@ const ProductDetail = ({ product, projects, products, onBack, onProductSelect }:
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-neutral-800 dark:text-neutral-200">
                     同じお店の他の商品
                 </h2>
-                <RelatedProducts
-                    currentProductId={product.id}
-                    projectId={product.projectId}
-                    products={products}
-                    onProductSelect={onProductSelect}
-                />
+                <RelatedProducts currentProductId={product.id} projectId={product.projectId} products={products} />
             </div>
         </div>
     );
