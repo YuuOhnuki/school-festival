@@ -30,7 +30,7 @@ export default function Page() {
                     <p className="text-sm md:text-base font-extralight py-2 pl-2 leading-5">
                         運営者が個人情報を収集・利用する目的は、以下のとおりです。
                     </p>
-                    <ul className="list-disc text-sm md:text-base font-extralight py-2 pl-6 leading-5">
+                    <ul className="list-disc text-sm md:text-base font-extralight py-2 pl-6 leading-6">
                         <li>本サービスの提供・運営のため</li>
                         <li>ユーザーからのお問い合わせに対応するため</li>
                         <li>本サービスの新機能や更新情報、キャンペーンなどの案内をメールで送付するため</li>
@@ -52,7 +52,7 @@ export default function Page() {
                     <p className="text-sm md:text-base font-extralight py-2 pl-2 leading-5">
                         運営者は、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、個人情報を第三者に提供することはありません。
                     </p>
-                    <ul className="list-disc text-sm md:text-base font-extralight py-2 pl-6 leading-5">
+                    <ul className="list-disc text-sm md:text-base font-extralight py-2 pl-6 leading-6">
                         <li>法令に基づき提供する必要がある場合</li>
                         <li>人の生命、身体または財産の保護のために必要があり、本人の同意を得ることが困難な場合</li>
                         <li>
@@ -86,7 +86,7 @@ export default function Page() {
                     <p className="text-sm md:text-base font-extralight py-2 pl-2 leading-5">
                         本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。
                         <br />
-                        Eメールアドレス：013600023062z6gc@gl.pen-kanagawa.ed.jp
+                        Eメールアドレス: 013600023062z6gc@gl.pen-kanagawa.ed.jp
                     </p>
                 </div>
             </div>
