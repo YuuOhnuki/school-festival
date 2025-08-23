@@ -104,7 +104,7 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
 
             <div className="grid lg:grid-cols-2 gap-4">
                 {product.isSoldOut && (
-                    <Alert variant="destructive" className="col-span-2 bg-red-50">
+                    <Alert variant="destructive" className="lg:col-span-2 col-span-1 bg-red-50">
                         <AlertTitle className="font-bold text-xl">売り切れ中</AlertTitle>
                         <AlertDescription>この商品は現在売り切れ中です。</AlertDescription>
                     </Alert>
