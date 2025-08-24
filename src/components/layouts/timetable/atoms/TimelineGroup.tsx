@@ -42,7 +42,7 @@ export const TimelineGroupComponent: React.FC<TimelineGroupProps> = ({ group, cu
             ></span>
             <div
                 className={cn(
-                    'relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-8 ring-white',
+                    'relative flex h-8 w-8 items-center justify-center rounded-full bg-white ring-8 ring-white',
                     isCurrentTimeGroup ? 'bg-blue-600 ring-blue-100' : 'bg-gray-300 ring-gray-100',
                 )}
                 aria-hidden="true"
