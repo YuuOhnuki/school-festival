@@ -1,24 +1,32 @@
-import type { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+    const baseUrl = 'https://school-festival-seven.vercel.app';
+
     return [
         {
-            url: 'https://acme.com',
+            url: `${baseUrl}/`,
             lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 1,
         },
         {
-            url: 'https://acme.com/about',
+            url: `${baseUrl}/products`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
         },
         {
-            url: 'https://acme.com/blog',
+            url: `${baseUrl}/projects`,
             lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/timetable`,
+            lastModified: new Date(),
+        },
+        {
+            url: `${baseUrl}/privacypolicy`,
+            lastModified: new Date(),
+        },
+        {
+            url: `${baseUrl}/sitepolicy`,
+            lastModified: new Date(),
         },
     ];
 }

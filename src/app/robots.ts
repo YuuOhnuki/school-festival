@@ -1,18 +1,14 @@
-import type { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+    const baseUrl = 'https://school-festival-seven.vercel.app';
+
     return {
-        rules: [
-            {
-                userAgent: 'Googlebot',
-                allow: ['/'],
-                disallow: '/private/',
-            },
-            {
-                userAgent: ['Applebot', 'Bingbot'],
-                disallow: ['/'],
-            },
-        ],
-        sitemap: 'https://acme.com/sitemap.xml',
+        rules: {
+            userAgent: '*',
+            allow: '/',
+            disallow: ['/sitemap.xml'], // 公開するならコメントアウト
+        },
+        // sitemap: `${baseUrl}/sitemap.xml`, //公開するならコメントアウトを外す
     };
 }
