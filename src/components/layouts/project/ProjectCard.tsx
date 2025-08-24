@@ -4,12 +4,19 @@ import { motion } from 'framer-motion';
 import { Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface ProjectCardProps {
     project: Project;
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
+    const [imageError, setImageError] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
     return (
         <motion.div
             key={project.id}
@@ -27,9 +34,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                     <Image
                         width={600}
                         height={600}
-                        src={project.thumbnail || ''}
+                        src={imageError || !project.thumbnail ? '/images/placeholder.png' : project.thumbnail}
                         alt={`${project.name} のサムネイル画像`}
                         className="w-full h-60 object-cover group-hover:scale-105 group-focus-visible:scale-105 transition-transform"
+                        onError={handleImageError}
                     />
                     {project.className && (
                         <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">

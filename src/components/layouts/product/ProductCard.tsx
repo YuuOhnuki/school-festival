@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/types';
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge'; // Badgeコンポーネントをインポート
 
 interface ProductCardProps {
@@ -13,6 +13,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, rank }: ProductCardProps) => {
+    const [imageError, setImageError] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
     return (
         <motion.div
             key={product.id}
@@ -30,9 +36,10 @@ const ProductCard = ({ product, rank }: ProductCardProps) => {
                     <Image
                         width={600}
                         height={600}
-                        src={product.thumbnail || ''}
+                        src={imageError || !product.thumbnail ? '/images/placeholder.png' : product.thumbnail}
                         alt={`${product.name} のサムネイル画像`}
                         className="w-full h-48 object-cover group-hover:scale-105 group-focus-visible:scale-105 transition-transform"
+                        onError={handleImageError}
                     />
                     {rank !== undefined && ( // rankが存在する場合のみBadgeを表示
                         <Badge variant="default" className="absolute top-4 left-4 px-2 font-bold text-sm">
