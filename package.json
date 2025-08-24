@@ -22,6 +22,7 @@
         "lucide-react": "^0.539.0",
         "motion": "^12.23.12",
         "next": "15.4.6",
+        "nextjs-toploader": "^3.8.16",
         "prettier": "^3.6.2",
         "react": "19.1.0",
         "react-dom": "19.1.0",

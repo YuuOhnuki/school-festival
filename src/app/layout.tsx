@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+
+import NextTopLoader from 'nextjs-toploader';
+
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
@@ -29,6 +32,7 @@ export default function RootLayout({
             <Analytics />
             <GoogleAnalytics gaId="G-BMTV5VPTKJ" />
             <body className={`${RampartOneFont.className} antialiased`}>
+                <NextTopLoader color="#2b7fff" height={4} showSpinner={false} />
                 <Header />
                 {children}
                 <Footer />
