@@ -133,8 +133,8 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                                     }`}
                                 >
                                     <Image
-                                        width="600"
-                                        height="600"
+                                        width="1000"
+                                        height="1000"
                                         src={image || ''}
                                         alt={`${product.name} ${index + 1}`}
                                         className="w-full h-full object-cover"

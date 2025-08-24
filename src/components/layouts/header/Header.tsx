@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { usePathname } from 'next/navigation'; // usePathnameをインポート
+import { usePathname } from 'next/navigation';
 import { Navbar } from './navigations/Navbar';
 import { NavBody } from './navigations/NavBody';
 import { NavbarLogo } from './navigations/NavbarLogo';
@@ -14,56 +14,49 @@ import Link from 'next/link';
 
 export function Header() {
     const navItems = [
-        {
-            name: 'ホーム',
-            link: '/',
-        },
-        {
-            name: 'プロジェクト',
-            link: '/projects',
-        },
-        {
-            name: '商品',
-            link: '/products',
-        },
-        {
-            name: 'タイムテーブル',
-            link: '/timetable',
-        },
+        { name: 'ホーム', link: '/' },
+        { name: 'プロジェクト', link: '/projects' },
+        { name: '商品', link: '/products' },
+        { name: 'タイムテーブル', link: '/timetable' },
     ];
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const pathname = usePathname(); // 現在のパスを取得
+    const pathname = usePathname();
+
+    const mobileMenuId = 'mobile-menu';
+
+    // メニューを開閉するハンドラー
+    const handleToggle = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
     return (
-        <div className="sticky top-0 z-1">
+        <header className="sticky top-0 z-10">
             <Navbar>
-                {/* Desktop Navigation */}
+                {/* デスクトップ用ナビゲーション */}
                 <NavBody>
                     <NavbarLogo />
-                    {/* ナビゲーションアイテムをレンダリング */}
-                    {/* 現在のパスをpropsとして渡す */}
                     <NavItems items={navItems} currentPath={pathname} />
                 </NavBody>
 
-                {/* Mobile Navigation */}
-                <MobileNav>
+                {/* モバイル用ナビゲーション */}
+                <MobileNav visible={isMobileMenuOpen}>
                     <MobileNavHeader>
                         <NavbarLogo />
-                        <MobileNavToggle
-                            isOpen={isMobileMenuOpen}
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        />
+                        <MobileNavToggle isOpen={isMobileMenuOpen} onClick={handleToggle} ariaControls={mobileMenuId} />
                     </MobileNavHeader>
 
-                    <MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>
-                        {navItems.map((item, idx) => (
+                    <MobileNavMenu isOpen={isMobileMenuOpen} onClose={handleToggle}>
+                        {navItems.map((item) => (
                             <Link
-                                key={`mobile-link-${idx}`}
+                                key={item.link}
                                 href={item.link}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className={`relative text-neutral-600 dark:text-neutral-300 ${
-                                    pathname === item.link ? 'text-blue-500 font-bold' : ''
+                                onClick={handleToggle}
+                                aria-current={pathname === item.link ? 'page' : undefined}
+                                className={`text-center text-lg font-medium py-2 px-4 w-full transition-colors rounded-md outline-none focus-visible:outline-4 focus-visible:outline-blue-500 focus-visible:outline-offset-2 ${
+                                    pathname === item.link
+                                        ? 'text-blue-500 dark:text-blue-400'
+                                        : 'text-neutral-600 dark:text-neutral-300 hover:text-blue-500 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                                 }`}
                             >
                                 <span className="block">{item.name}</span>
@@ -72,6 +65,6 @@ export function Header() {
                     </MobileNavMenu>
                 </MobileNav>
             </Navbar>
-        </div>
+        </header>
     );
 }

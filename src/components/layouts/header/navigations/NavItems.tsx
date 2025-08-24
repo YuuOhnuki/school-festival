@@ -30,7 +30,7 @@ export const NavItems = ({ items, className, onItemClick, currentPath }: NavItem
                         onMouseEnter={() => setHovered(idx)}
                         onClick={onItemClick}
                         className={`relative px-4 py-2 text-neutral-600 dark:text-neutral-300 ${
-                            isActive ? 'text-primary font-bold' : ''
+                            isActive ? 'text-primary underline font-bold' : ''
                         }`}
                         key={`link-${idx}`}
                         href={item.link}
