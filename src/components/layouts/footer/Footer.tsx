@@ -24,7 +24,7 @@ const Footer = () => {
                                         href="/projects"
                                         className="text-neutral-400 hover:text-white transition-colors"
                                     >
-                                        プロジェクト一覧
+                                        お店一覧
                                     </Link>
                                 </li>
                                 <li>

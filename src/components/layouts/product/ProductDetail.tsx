@@ -1,12 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { Product, Project } from '@/types/types';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { BackButton } from '@/components/BackButton';
+import ProductCard from './ProductCard';
 
 interface ProductDetailProps {
     product: Product;
@@ -34,43 +33,8 @@ const RelatedProducts = ({
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedProducts.map((product, index) => (
-                <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all hover:scale-105"
-                >
-                    <Link href={`/products/${product.id}`}>
-                        <div className="relative">
-                            <Image
-                                width="600"
-                                height="600"
-                                src={product.thumbnail || ''}
-                                alt={product.name}
-                                className="w-full h-48 object-cover"
-                            />
-                            {product.isSoldOut && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                    <span className="text-white font-bold">売り切れ</span>
-                                </div>
-                            )}
-                        </div>
-                        <div className="p-4">
-                            <h3 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">
-                                {product.name}
-                            </h3>
-                            <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
-                                {product.description}
-                            </p>
-                            <div className="flex justify-between items-center">
-                                <span className="text-xl font-bold text-blue-600">¥{product.price}</span>
-                                <span className="text-sm text-neutral-500">売上: {product.sales}</span>
-                            </div>
-                        </div>
-                    </Link>
-                </motion.div>
+            {relatedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
             ))}
         </div>
     );
@@ -78,6 +42,7 @@ const RelatedProducts = ({
 
 const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const [imageError, setImageError] = useState(false);
     const project = projects.find((p) => p.id === product.projectId);
 
     // アレルギー情報の配列
@@ -96,6 +61,10 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
 
     const images = product.images.length > 0 ? product.images : [product.thumbnail].filter(Boolean);
 
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
     return (
         <div>
             <BackButton />
@@ -113,9 +82,14 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                         <Image
                             width="600"
                             height="600"
-                            src={images[selectedImageIndex] || product.thumbnail || ''}
+                            src={
+                                imageError || !images[selectedImageIndex]
+                                    ? '/images/placeholder.png'
+                                    : images[selectedImageIndex]
+                            }
                             alt={product.name}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            onError={handleImageError}
                         />
                     </div>
 
@@ -133,11 +107,12 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                                     }`}
                                 >
                                     <Image
-                                        width="1000"
-                                        height="1000"
-                                        src={image || ''}
+                                        width={1000}
+                                        height={1000}
+                                        src={imageError || !image ? '/images/placeholder.png' : image}
                                         alt={`${product.name} ${index + 1}`}
                                         className="w-full h-full object-cover"
+                                        onError={handleImageError}
                                     />
                                 </button>
                             ))}
