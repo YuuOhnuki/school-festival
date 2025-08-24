@@ -5,6 +5,7 @@ import { Project } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { CircleArrowRight } from 'lucide-react';
 
 interface ProjectCardProps {
     project: Project;
@@ -23,7 +24,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden relative"
+            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden relative border-2 border-transparent hover:border-blue-500 focus:outline-none focus:border-blue-500"
         >
             <Link
                 href={`/projects/${project.id}`}
@@ -53,9 +54,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-xl font-bold text-blue-600">3年{project.className}組</span>
                     </div>
-                    <span className="text-xs font-thin text-muted-foreground group-hover:underline group-focus-visible:underline">
-                        クリックして詳細を見る
-                    </span>
+                    <div className="flex justify-between items-center text-muted-foreground underline">
+                        <span className="text-xs font-thin">クリックして詳細を見る</span>
+                        <div className="transition-transform duration-300 group-hover:translate-x-1">
+                            <CircleArrowRight size={20} />
+                            <span className="sr-only">詳細ページへ移動する矢印アイコン</span>
+                        </div>
+                    </div>
                 </div>
             </Link>
         </motion.div>

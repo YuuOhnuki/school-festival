@@ -9,8 +9,7 @@ interface TopProductsCarouselProps {
 }
 
 const TopProductsCarousel = ({ products }: TopProductsCarouselProps) => {
-    // Sort products by sales in descending order and take top 6
-    const topProducts = [...products].sort((a, b) => b.sales - a.sales).slice(0, 6);
+    const topProducts = [...products].sort((a, b) => b.sales - a.sales).slice(0, 6); // TOP6
 
     return (
         <div className="w-full py-10 bg-neutral-50 dark:bg-neutral-900">

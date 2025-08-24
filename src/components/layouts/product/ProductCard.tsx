@@ -5,11 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/types';
 import React, { useState } from 'react';
-import { Badge } from '@/components/ui/badge'; // Badgeコンポーネントをインポート
+import { Badge } from '@/components/ui/badge';
+import { CircleArrowRight } from 'lucide-react';
 
 interface ProductCardProps {
     product: Product;
-    rank?: number; // 順位をオプションとして追加
+    rank?: number;
 }
 
 const ProductCard = ({ product, rank }: ProductCardProps) => {
@@ -25,7 +26,7 @@ const ProductCard = ({ product, rank }: ProductCardProps) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden relative"
+            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden relative border-2 border-transparent hover:border-blue-500 focus:outline-none focus:border-blue-500"
         >
             <Link
                 href={`/products/${product.id}`}
@@ -41,7 +42,7 @@ const ProductCard = ({ product, rank }: ProductCardProps) => {
                         className="w-full h-48 object-cover group-hover:scale-105 group-focus-visible:scale-105 transition-transform"
                         onError={handleImageError}
                     />
-                    {rank !== undefined && ( // rankが存在する場合のみBadgeを表示
+                    {rank !== undefined && (
                         <Badge variant="default" className="absolute top-4 left-4 px-2 font-bold text-sm">
                             #{rank}
                         </Badge>
@@ -55,18 +56,26 @@ const ProductCard = ({ product, rank }: ProductCardProps) => {
                         </div>
                     )}
                 </div>
-                <div className="p-4">
-                    <h3 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">{product.name}</h3>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
-                        {product.description}
-                    </p>
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-xl font-bold text-blue-600">¥{product.price}</span>
-                        <span className="text-sm text-neutral-500">売上: {product.sales}</span>
+                <div className="p-4 flex justify-between items-center">
+                    <div className="flex-1 min-w-0 pr-4">
+                        <h3 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">
+                            {product.name}
+                        </h3>
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3 line-clamp-2">
+                            {product.description}
+                        </p>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-xl font-bold text-blue-600">¥{product.price}</span>
+                            <span className="text-sm text-neutral-500">売上: {product.sales}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-muted-foreground underline">
+                            <span className="text-xs font-thin">クリックして詳細を見る</span>
+                            <div className="transition-transform duration-300 group-hover:translate-x-1">
+                                <CircleArrowRight size={20} />
+                                <span className="sr-only">詳細ページへ移動する矢印アイコン</span>
+                            </div>
+                        </div>
                     </div>
-                    <span className="text-xs font-thin text-muted-foreground group-hover:underline group-focus-visible:underline">
-                        クリックして詳細を見る
-                    </span>
                 </div>
             </Link>
         </motion.div>

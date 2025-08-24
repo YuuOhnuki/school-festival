@@ -18,7 +18,7 @@ const ProjectTabs = ({ projects }: ProjectTabsProps) => {
     return (
         <div className="w-full max-w-7xl mx-auto px-4 py-10">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-neutral-800 dark:text-neutral-200">
-                プロジェクト紹介
+                お店紹介
             </h2>
 
             {/* Tab Navigation */}
