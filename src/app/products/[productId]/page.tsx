@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: Promise<{ productId: st
 
     return (
         <div className="w-full max-w-7xl mx-auto py-5 px-4">
-            <ProductDetail product={product} projects={mockProjects} products={mockProducts} />
+            <ProductDetail product={product} shops={mockProjects} products={mockProducts} />
         </div>
     );
 }

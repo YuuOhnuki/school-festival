@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Project } from '@/types/types';
+import { Shop } from '@/types';
 import React from 'react';
 
 interface FilterBarProps {
@@ -10,9 +10,9 @@ interface FilterBarProps {
     setSearchTerm: (term: string) => void;
     sortBy: 'name' | 'price' | 'sales';
     setSortBy: (sort: 'name' | 'price' | 'sales') => void;
-    filterProject: number | null;
-    setFilterProject: (id: number | null) => void;
-    projects: Project[];
+    filterShop: number | null;
+    setFilterShop: (id: number | null) => void;
+    shops: Shop[];
 }
 
 const FilterBar = ({
@@ -20,9 +20,9 @@ const FilterBar = ({
     setSearchTerm,
     sortBy,
     setSortBy,
-    filterProject,
-    setFilterProject,
-    projects,
+    filterShop,
+    setFilterShop,
+    shops,
 }: FilterBarProps) => {
     return (
         <div className="mb-4 flex flex-col xl:flex-row gap-2 justify-center" role="search">
@@ -46,19 +46,20 @@ const FilterBar = ({
                     </SelectContent>
                 </Select>
                 <Select
-                    value={filterProject !== null ? String(filterProject) : 'all'}
-                    onValueChange={(value) => setFilterProject(value === 'all' ? null : parseInt(value, 10))}
+                    value={filterShop !== null ? String(filterShop) : 'all'}
+                    onValueChange={(value) => setFilterShop(value === 'all' ? null : parseInt(value, 10))}
                 >
                     <SelectTrigger className="w-full">
                         <SelectValue placeholder="プロジェクトで絞り込み" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="all">全て</SelectItem>
-                        {projects.map((project) => (
-                            <SelectItem key={project.id} value={String(project.id)}>
-                                {project.className}
-                            </SelectItem>
-                        ))}
+                        {shops &&
+                            shops.map((shop) => (
+                                <SelectItem key={shop.id} value={String(shop.id)}>
+                                    {shop.className}
+                                </SelectItem>
+                            ))}
                     </SelectContent>
                 </Select>
             </div>

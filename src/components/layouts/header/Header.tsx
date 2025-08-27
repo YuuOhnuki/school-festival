@@ -15,7 +15,7 @@ import Link from 'next/link';
 export function Header() {
     const navItems = [
         { name: 'ホーム', link: '/' },
-        { name: 'お店', link: '/projects' },
+        { name: 'お店', link: '/shops' },
         { name: '商品', link: '/products' },
         { name: 'タイムテーブル', link: '/timetable' },
     ];

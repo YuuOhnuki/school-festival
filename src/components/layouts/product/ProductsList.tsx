@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { Product, Project } from '@/types/types';
+import { Product, Shop } from '@/types';
 import FilterBar from './FilterBar';
 import ProductCard from './ProductCard';
 
 interface ProductsListProps {
     products: Product[];
-    projects: Project[];
+    shops: Shop[];
 }
 
-const ProductsList = ({ products, projects }: ProductsListProps) => {
+const ProductsList = ({ products, shops }: ProductsListProps) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState<'name' | 'price' | 'sales'>('sales');
-    const [filterProject, setFilterProject] = useState<number | null>(null);
+    const [filterShop, setFilterShop] = useState<number | null>(null);
 
     // Filter and sort products
     const filteredProducts = products
         .filter(
             (product) =>
                 product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                (filterProject === null || product.projectId === filterProject),
+                (filterShop === null || product.shopId === filterShop),
         )
         .sort((a, b) => {
             switch (sortBy) {
@@ -42,9 +42,9 @@ const ProductsList = ({ products, projects }: ProductsListProps) => {
                 setSearchTerm={setSearchTerm}
                 sortBy={sortBy}
                 setSortBy={setSortBy}
-                filterProject={filterProject}
-                setFilterProject={setFilterProject}
-                projects={projects}
+                filterShop={filterShop}
+                setFilterShop={setFilterShop}
+                shops={shops}
             />
 
             {/* Products Grid */}

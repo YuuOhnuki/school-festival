@@ -1,5 +1,5 @@
 import HeroParallax from '@/components/layouts/hero/HeroParallax';
-import ProjectTabs from '@/components/layouts/project/ProjectTabs';
+import ProjectTabs from '@/components/layouts/shop/ShopTabs';
 import TopProductsCarousel from '@/components/layouts/product/TopProductsCarousel';
 import { mockProducts, mockProjects } from '@/lib/mock-data';
 
