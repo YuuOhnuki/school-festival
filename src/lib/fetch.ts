@@ -1,4 +1,4 @@
-const BASE_URL = process.env.PUBLIC_NEXT_API_URL;
+const BASE_URL = 'https://eventpos.vercel.app';
 // let BASE_URL = process.env.PUBLIC_NEXT_API_URL;
 // if (process.env.NODE_ENV == 'development') BASE_URL = 'http://localhost:3000';
 
