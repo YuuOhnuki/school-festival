@@ -10,7 +10,7 @@ interface ShopDetailProps {
 }
 
 const ShopDetail = ({ shop, products }: ShopDetailProps) => {
-    const shopProducts = products.filter((product) => product.shopId === shop.id);
+    const shopProducts = products.filter((product) => product.projectId === shop.id);
 
     return (
         <div>

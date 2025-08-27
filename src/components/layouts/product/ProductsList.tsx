@@ -20,7 +20,7 @@ const ProductsList = ({ products, shops }: ProductsListProps) => {
         .filter(
             (product) =>
                 product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                (filterShop === null || product.shopId === filterShop),
+                (filterShop === null || product.projectId === filterShop),
         )
         .sort((a, b) => {
             switch (sortBy) {

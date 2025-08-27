@@ -136,7 +136,8 @@ export type Product = {
     updatedAt: Date;
     academicYear: number;
     createdById: string;
-    shopId: number;
+    // shopId: number;
+    projectId: number;
     createdBy?: User; // ProductはUserによって作成される（1対1）
     shop?: Shop; // ProductはShopに属する（1対1）
     orderItems?: OrderItem[]; // Productは複数のOrderItemに紐づく（1対多）

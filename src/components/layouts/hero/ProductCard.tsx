@@ -1,8 +1,16 @@
+'use client';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { ProductCardProps } from '@/types/hero';
+import { useState } from 'react';
 
 const ProductCard = ({ product, translate }: ProductCardProps) => {
+    const [imageError, setImageError] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
     return (
         <motion.div
             style={{ x: translate }}
@@ -12,11 +20,12 @@ const ProductCard = ({ product, translate }: ProductCardProps) => {
         >
             <div className="block group-hover/product:shadow-2xl">
                 <Image
-                    src={product.thumbnail || ''}
-                    height="600"
-                    width="600"
-                    className="object-cover object-left-top absolute h-full w-full inset-0 rounded-xl"
-                    alt={product.name}
+                    width={1000}
+                    height={1000}
+                    src={imageError || !product.thumbnail ? '/images/placeholder.png' : product.thumbnail}
+                    alt={`${product.name}`}
+                    className="w-full h-full object-cover"
+                    onError={handleImageError}
                 />
             </div>
             <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none rounded-xl"></div>

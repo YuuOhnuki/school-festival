@@ -24,7 +24,7 @@ const RelatedProducts = ({
     products: Product[];
 }) => {
     const relatedProducts = products
-        .filter((product) => product.shopId === shopId && product.id !== currentProductId)
+        .filter((product) => product.projectId === shopId && product.id !== currentProductId)
         .slice(0, 3);
 
     if (relatedProducts.length === 0) {
@@ -43,7 +43,7 @@ const RelatedProducts = ({
 const ProductDetail = ({ product, shops, products }: ProductDetailProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [imageError, setImageError] = useState(false);
-    const shop = shops.find((p) => p.id === product.shopId);
+    const shop = shops.find((p) => p.id === product.projectId);
 
     // アレルギー情報の配列
     const allergens = [
@@ -314,7 +314,7 @@ const ProductDetail = ({ product, shops, products }: ProductDetailProps) => {
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-neutral-800 dark:text-neutral-200">
                     同じお店の他の商品
                 </h2>
-                <RelatedProducts currentProductId={product.id} shopId={product.shopId} products={products} />
+                <RelatedProducts currentProductId={product.id} shopId={product.projectId} products={products} />
             </div>
         </div>
     );
