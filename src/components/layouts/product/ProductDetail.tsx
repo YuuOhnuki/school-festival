@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Product, Project } from '@/types/types';
+import { Product, Shop } from '@/types';
 import Image from 'next/image';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { BackButton } from '@/components/BackButton';
@@ -9,22 +9,22 @@ import ProductCard from './ProductCard';
 
 interface ProductDetailProps {
     product: Product;
-    projects: Project[];
+    shops: Shop[];
     products: Product[];
 }
 
 // Related Products Component
 const RelatedProducts = ({
     currentProductId,
-    projectId,
+    shopId,
     products,
 }: {
     currentProductId: number;
-    projectId: number;
+    shopId: number;
     products: Product[];
 }) => {
     const relatedProducts = products
-        .filter((product) => product.projectId === projectId && product.id !== currentProductId)
+        .filter((product) => product.projectId === shopId && product.id !== currentProductId)
         .slice(0, 3);
 
     if (relatedProducts.length === 0) {
@@ -40,10 +40,10 @@ const RelatedProducts = ({
     );
 };
 
-const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
+const ProductDetail = ({ product, shops, products }: ProductDetailProps) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [imageError, setImageError] = useState(false);
-    const project = projects.find((p) => p.id === product.projectId);
+    const shop = shops.find((p) => p.id === product.projectId);
 
     // アレルギー情報の配列
     const allergens = [
@@ -125,7 +125,7 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                     <div>
                         <div className="flex items-center gap-3 mb-2">
                             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                                3{project?.className}
+                                3{shop?.className}
                             </span>
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
@@ -143,9 +143,9 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                             <span className="text-neutral-500">売上: {product.sales}個</span>
                         </div>
                         <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                            {project && (
+                            {shop && (
                                 <p>
-                                    提供店舗: <span className="font-medium">{project.name}</span>
+                                    提供店舗: <span className="font-medium">{shop.name}</span>
                                 </p>
                             )}
                         </div>
@@ -259,7 +259,7 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                     </div>
 
                     {/* 店舗情報 */}
-                    {project && (
+                    {shop && (
                         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
                             <h3 className="text-lg font-bold text-blue-800 dark:text-blue-300 mb-4 flex items-center gap-2">
                                 <span>🏪</span>
@@ -267,14 +267,14 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                             </h3>
                             <div className="space-y-3">
                                 <div>
-                                    <h4 className="font-bold text-blue-700 dark:text-blue-400">{project.name}</h4>
+                                    <h4 className="font-bold text-blue-700 dark:text-blue-400">{shop.name}</h4>
                                     <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                                        {project.description}
+                                        {shop.description}
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
                                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded font-medium">
-                                        3年{project.className}組
+                                        3年{shop.className}組
                                     </span>
                                 </div>
                             </div>
@@ -314,7 +314,7 @@ const ProductDetail = ({ product, projects, products }: ProductDetailProps) => {
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-neutral-800 dark:text-neutral-200">
                     同じお店の他の商品
                 </h2>
-                <RelatedProducts currentProductId={product.id} projectId={product.projectId} products={products} />
+                <RelatedProducts currentProductId={product.id} shopId={product.projectId} products={products} />
             </div>
         </div>
     );

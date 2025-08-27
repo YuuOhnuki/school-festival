@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/types/types';
+import { Product } from '@/types';
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { CircleArrowRight } from 'lucide-react';

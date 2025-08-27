@@ -2,17 +2,17 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Project } from '@/types/types';
+import { Shop } from '@/types';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-interface ProjectTabsProps {
-    projects: Project[];
+interface ShopTabsProps {
+    shops: Shop[];
 }
 
-const ProjectTabs = ({ projects }: ProjectTabsProps) => {
+const ShopTabs = ({ shops }: ShopTabsProps) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
@@ -23,9 +23,9 @@ const ProjectTabs = ({ projects }: ProjectTabsProps) => {
 
             {/* Tab Navigation */}
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-                {projects.map((project, index) => (
+                {shops.map((shop, index) => (
                     <button
-                        key={project.id}
+                        key={shop.id}
                         onClick={() => setActiveTab(index)}
                         className={`px-6 py-3 rounded-full font-medium transition-all duration-300 cursor-pointer ${
                             activeTab === index
@@ -33,7 +33,7 @@ const ProjectTabs = ({ projects }: ProjectTabsProps) => {
                                 : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600'
                         }`}
                     >
-                        3{project.className}
+                        3{shop.className}
                     </button>
                 ))}
             </div>
@@ -53,19 +53,19 @@ const ProjectTabs = ({ projects }: ProjectTabsProps) => {
                             <Image
                                 width="600"
                                 height="600"
-                                src={projects[activeTab].thumbnail || ''}
-                                alt={projects[activeTab].name}
+                                src={shops[activeTab].thumbnail || ''}
+                                alt={shops[activeTab].name}
                                 className="w-full h-64 object-cover rounded-xl"
                             />
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold mb-4 text-neutral-800 dark:text-neutral-200">
-                                {projects[activeTab].name}
+                                {shops[activeTab].name}
                             </h3>
                             <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-                                {projects[activeTab].description}
+                                {shops[activeTab].description}
                             </p>
-                            <Link href={`/projects/${projects[activeTab].id}`}>
+                            <Link href={`/shops/${shops[activeTab].id}`}>
                                 <Button variant="default" className="p-6 font-medium w-full cursor-pointer">
                                     詳細を見る
                                 </Button>
@@ -78,4 +78,4 @@ const ProjectTabs = ({ projects }: ProjectTabsProps) => {
     );
 };
 
-export default ProjectTabs;
+export default ShopTabs;

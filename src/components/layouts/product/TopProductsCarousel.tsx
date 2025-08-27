@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Product } from '@/types/types';
+import { Product } from '@/types';
 import ProductCard from './ProductCard';
 
 interface TopProductsCarouselProps {
